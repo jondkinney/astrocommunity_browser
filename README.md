@@ -28,6 +28,7 @@ Add the following to your plugins/astrocommunity_browser.lua file:
 ```lua
 return {
   "jondkinney/astrocommunity_browser",
+  config = true,
   -- Optional: Override default keymap <Leader>po (nemonic: plugin open)
   opts = {
     keys = {
