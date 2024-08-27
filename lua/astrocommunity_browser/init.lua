@@ -3,19 +3,35 @@ local api = vim.api
 
 local M = {}
 
--- Function to load the plugin
-function M.load()
-	M.config = require("astrocommunity_browser.setup")
-	M.setup()
+-- Default key mapping
+local default_keymap = { "n", "<leader>po", ":OpenAstroCommunityPluginURL<CR>", { noremap = true, silent = true } }
+
+-- Function to load the plugins specified in the configuration file
+function M.load_plugins()
+	local plugins = require("astrocommunity_browser")
+	if type(plugins) == "table" then
+		for _, plugin in ipairs(plugins) do
+			require(plugin)
+		end
+	else
+		print("Invalid plugin configuration. Please specify plugins as a table.")
+	end
 end
 
--- Setup function to create the command and key mapping
+-- Function to setup the plugin and key mappings
 function M.setup()
-	-- Create a Neovim command to trigger the function
-	api.nvim_command("command! OpenAstroCommunityPluginURL lua require('your_plugin_module').open_url()")
+	M.load_plugins()
+	-- Add additional setup logic here
 
-	-- Optional: Create a key mapping to easily trigger the command
-	api.nvim_set_keymap("n", "<leader>po", ":OpenAstroCommunityPluginURL<CR>", { noremap = true, silent = true })
+	-- Setup custom key mappings if specified
+	if M.keys then
+		for _, keymap in ipairs(M.keys) do
+			api.nvim_set_keymap(unpack(keymap))
+		end
+	else
+		-- Apply default key mapping if no custom key mappings are provided
+		api.nvim_set_keymap(unpack(default_keymap))
+	end
 end
 
 -- Function to parse the import line and open the URL
