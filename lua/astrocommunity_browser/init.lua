@@ -3,6 +3,17 @@ local api = vim.api
 
 local M = {}
 
+M.config = require("astrocommunity_browser.setup")
+
+-- Setup function to create the command and key mapping
+function M.setup()
+	-- Create a Neovim command to trigger the function
+	api.nvim_create_user_command("OpenAstroCommunityPluginURL", M.open_url, {})
+
+	-- Optional: Create a key mapping to easily trigger the command
+	api.nvim_set_keymap("n", "<leader>po", ":OpenAstroCommunityPluginURL<CR>", { noremap = true, silent = true })
+end
+
 -- Function to parse the import line and open the URL
 function M.open_url()
 	-- Get the current line under the cursor
@@ -34,15 +45,6 @@ function M.open_url()
 	else
 		print("No valid import path found in the current line.")
 	end
-end
-
--- Setup function to create the command and key mapping
-function M.setup()
-	-- Create a Neovim command to trigger the function
-	api.nvim_create_user_command("OpenAstroCommunityPluginURL", M.open_url, {})
-
-	-- Optional: Create a key mapping to easily trigger the command
-	api.nvim_set_keymap("n", "<leader>po", ":OpenAstroCommunityPluginURL<CR>", { noremap = true, silent = true })
 end
 
 return M
