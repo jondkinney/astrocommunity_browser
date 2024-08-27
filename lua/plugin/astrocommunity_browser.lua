@@ -11,6 +11,10 @@ if vim.g.loaded_astrocommunity_browser == 1 then
 end
 vim.g.loaded_astrocommunity_browser = 1
 
+-- Load and setup the plugin
+local astrocommunity_browser = require("astrocommunity_browser")
+astrocommunity_browser.setup()
+
 -- Create the command
 vim.api.nvim_create_user_command("OpenAstroCommunityPluginURL", function()
 	require("astrocommunity_browser.commands").open_url()
