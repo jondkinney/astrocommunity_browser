@@ -21,47 +21,25 @@ Navigating to the specific GitHub repository of an AstroNvim community plugin ca
 
 ## Installation
 
-### Using lazy.nvim
-
-```lua
-{
-  "jondkinney/astrocommunity_browser",
-  opts = {
-    -- Optional: Override default options
-    keys = {
-      { "n", "<Leader>ac", ":OpenAstroCommunityPluginURL<CR>", { noremap = true, silent = true } }
-    },
-  },
-}
-```
-
 ### For AstroNvim users
 
-Add the following to your plugins/community.lua file:
+Add the following to your plugins/astrocommunity_browser.lua file:
 
 ```lua
 return {
   "jondkinney/astrocommunity_browser",
+  -- Optional: Override default keymap <Leader>po (nemonic: plugin open)
   opts = {
-    -- Optional: Override default options
+    keys = {
+      { "n", "<Leader>ac", ":OpenAstroCommunityPluginURL<CR>", { noremap = true, silent = true } }
+    },
   },
 }
 ```
 
 ## Configuration
 
-The plugin comes with default settings, but you can customize them by passing options to the setup function:
-
-```lua
-{
-  "jondkinney/astrocommunity_browser",
-  opts = {
-    keys = {
-      { "n", "<Leader>ac", ":OpenAstroCommunityPluginURL<CR>", { noremap = true, silent = true } }
-    },
-  },
-}
-```
+The plugin comes with default settings, but you can customize them by passing options to the setup function.
 
 ### Default Key Mapping
 
